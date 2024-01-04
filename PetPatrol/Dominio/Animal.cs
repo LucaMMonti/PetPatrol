@@ -17,8 +17,8 @@ namespace Dominio
         public int Edad { get; set; }
         public string Tamanio { get; set; }
         public string Descripcion { get; set; }
-        public string Estado { get; set; }
-        public string Foto { get; set; }
+        public bool Perdido { get; set; }
+        public List<Imagen> Imagenes { get; set; }
         public string FechaPerdida { get; set; }
         public string FechaEncontrada { get; set; }
         public string FechaAdopcion { get; set; }

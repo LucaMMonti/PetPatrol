@@ -16,6 +16,6 @@ namespace Dominio
         public string Direccion { get; set;}
         public int Telefono { get; set; }
         public string Email { get; set; }
-        public string Foto { get; set; }
+        public List<Imagen> Imagenes { get; set; }
     }
 }
