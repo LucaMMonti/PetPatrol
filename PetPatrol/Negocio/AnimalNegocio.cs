@@ -11,7 +11,6 @@ namespace Negocio
             {
                 List<Animal> lista = new List<Animal>();
                 AccesoDatos datos = new AccesoDatos();
-
                 try
                 {
                     datos.setearConsulta("SELECT ID, Nombre, Especie, Raza, Sexo, Color, Edad, Tamanio, Descripcion, Perdido, FechaPerdida, FechaEncontrada, FechaAdopcion, Castrado FROM Animales");
@@ -36,10 +35,8 @@ namespace Negocio
                             FechaAdopcion = (string)datos.Lector["FechaAdopcion"],
                             Castrado = (bool)datos.Lector["Castrado"]                          
                         };
-
                         lista.Add(aux);
                     }
-
                     return lista;
                 }
                 catch (Exception ex)
@@ -55,7 +52,6 @@ namespace Negocio
             public void Agregar(Animal animal)
             {
                 AccesoDatos datos = new AccesoDatos();
-
                 try
                 {
                     string valores = "values(@Nombre, @Especie, @Raza, @Sexo, @Color, @Edad, @Tamanio, @Descripcion, @Perdido, @FechaPerdida, @FechaEncontrada, @FechaAdopcion, @Castrado)";
@@ -90,7 +86,6 @@ namespace Negocio
             public void Modificar(Animal animal)
             {
                 AccesoDatos datos = new AccesoDatos();
-
                 try
                 {
                     datos.setearConsulta("UPDATE Prenda SET Nombre = @Nombre, Especie = @Especie, Raza = @Raza, Sexo = @Sexo, Color = @Color, Edad = @Edad," +
@@ -119,14 +114,12 @@ namespace Negocio
                 finally
                 {
                     datos.cerrarConexion();
-                }
-                
+                }              
             }
 
             public void Eliminar(int ID)
             {
                 AccesoDatos datos = new AccesoDatos();
-
                 try
                 {
                     datos.setearConsulta("DELETE FROM Animal WHERE ID = @id");
