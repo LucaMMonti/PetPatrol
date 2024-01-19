@@ -11,12 +11,18 @@ CREATE TABLE Animales (
     Color VARCHAR(50),
     Edad INT,
     Tamanio VARCHAR(50),
-    Descripcion TEXT,
+    Descripcion VARCHAR(200),
     Perdido BIT,
     FechaPerdida DATETIME,
     FechaEncontrada DATETIME,
     FechaAdopcion DATETIME,
     Castrado BIT
+);
+
+-- Creación de la tabla Roles 
+CREATE TABLE Roles (
+    RolId INT PRIMARY KEY IDENTITY,
+    NombreRol VARCHAR(50)
 );
 
 -- Creación de la tabla Usuarios
@@ -28,14 +34,15 @@ CREATE TABLE Usuarios (
     Apellido VARCHAR(100),
     Direccion VARCHAR(255),
     Telefono INT,
-    Email VARCHAR(100)
+    Email VARCHAR(100),
+    RoleId INT
 );
 
 -- Creación de la tabla Publicaciones
 CREATE TABLE Publicaciones (
     ID INT PRIMARY KEY IDENTITY,
     Titulo VARCHAR(100),
-    Descripcion TEXT,
+    Descripcion VARCHAR(200),
     FechaPublicacion DATETIME,
     TipoPublicacion VARCHAR(50),
     Estado VARCHAR(50),
@@ -44,7 +51,6 @@ CREATE TABLE Publicaciones (
     LocalizacionID INT,
     FOREIGN KEY (UsuarioID) REFERENCES Usuarios(ID),
     FOREIGN KEY (AnimalID) REFERENCES Animales(ID)
-    -- La referencia a LocalizacionID se añadirá después de crear la tabla Localizaciones
 );
 
 -- Creación de la tabla Imagenes
@@ -68,10 +74,14 @@ CREATE TABLE Localizaciones (
 ALTER TABLE Publicaciones
 ADD FOREIGN KEY (LocalizacionID) REFERENCES Localizaciones(ID);
 
+-- Actualizar la tabla Usuarios para establecer una clave foránea con Roles
+ALTER TABLE Usuarios
+ADD FOREIGN KEY (RoleId) REFERENCES Roles(RolId);
+
 -- Creación de la tabla Comentarios
 CREATE TABLE Comentarios (
     ID INT PRIMARY KEY IDENTITY,
-    Texto TEXT,
+    Texto VARCHAR(200),
     Fecha DATETIME,
     UsuarioID INT,
     PublicacionID INT,
@@ -82,7 +92,7 @@ CREATE TABLE Comentarios (
 -- Creación de la tabla Notificaciones
 CREATE TABLE Notificaciones (
     ID INT PRIMARY KEY IDENTITY,
-    Texto TEXT,
+    Texto VARCHAR(100),
     Fecha DATETIME,
     UsuarioID INT,
     PublicacionID INT,
@@ -90,3 +100,7 @@ CREATE TABLE Notificaciones (
     FOREIGN KEY (UsuarioID) REFERENCES Usuarios(ID),
     FOREIGN KEY (PublicacionID) REFERENCES Publicaciones(ID)
 );
+
+-- Insertar roles básicos
+INSERT INTO Roles (NombreRol) VALUES ('Usuario');
+INSERT INTO Roles (NombreRol) VALUES ('Administrador');
