@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Negocio;
 using System;
 
 namespace PetPatrolWeb
@@ -16,8 +17,11 @@ namespace PetPatrolWeb
                 NombreUsuario = txtNombreUsuario.Text,
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
-                Contrasena = txtContrasena.Text, // Considera aplicar hashing a la contraseña aquí
-                                                 // Continúa asignando el resto de las propiedades
+                Contrasena = txtContrasena.Text, // INVESTIGAR HASHING PARA CONTRASEÑAS
+                Direccion = txtDireccion.Text,
+                Telefono = Convert.ToInt32(txtTelefono.Text),
+                Email = txtEmail.Text,
+                //Procesar la imagen de perfil, analizar
             };
 
             UsuarioNegocio negocio = new UsuarioNegocio();
